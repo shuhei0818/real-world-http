@@ -9,7 +9,8 @@ import (
 
 func Write(resp *http.Response) {
 	fmt.Println("---- Request ----")
-	fmt.Printf("%s %s %s\n", resp.Request.Method, resp.Request.URL.Path, resp.Request.Proto)
+
+	fmt.Printf("%s %s %s\n", resp.Request.Method, resp.Request.URL.Path+"?"+resp.Request.URL.RawQuery, resp.Request.Proto)
 
 	for k, v := range resp.Request.Header {
 		fmt.Printf("%s: %s\n", k, strings.Join(v, ";"))
