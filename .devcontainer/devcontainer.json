@@ -1,0 +1,21 @@
+{
+    "name": "Go",
+    "dockerComposeFile": [
+        "docker-compose.yml"
+    ],
+    "service": "go",
+    "workspaceFolder": "/workspace",
+    "settings": {
+        "terminal.integrated.profiles.linux": {
+            "bash (login)": {
+                "path": "bash",
+                "args": [
+                    "-l"
+                ]
+            }
+        }
+    },
+    "extensions": [
+        "golang.go",
+    ]
+}
