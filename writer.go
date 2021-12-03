@@ -10,7 +10,12 @@ import (
 func Write(resp *http.Response) {
 	fmt.Println("---- Request ----")
 
-	fmt.Printf("%s %s %s\n", resp.Request.Method, resp.Request.URL.Path+"?"+resp.Request.URL.RawQuery, resp.Request.Proto)
+	path := resp.Request.URL.Path
+	if len(resp.Request.URL.RawQuery) > 0 {
+		path += "?" + resp.Request.URL.RawQuery
+	}
+
+	fmt.Printf("%s %s %s\n", resp.Request.Method, path, resp.Request.Proto)
 
 	for k, v := range resp.Request.Header {
 		fmt.Printf("%s: %s\n", k, strings.Join(v, ";"))
@@ -20,7 +25,8 @@ func Write(resp *http.Response) {
 
 	var qb []byte
 	if resp.Request.Body != nil {
-		qb, _ = io.ReadAll(resp.Request.Body)
+		b, _ := resp.Request.GetBody()
+		qb, _ = io.ReadAll(b)
 	}
 
 	fmt.Println(string(qb))
