@@ -14,6 +14,7 @@ func main() {
 		"query": {"hello world"},
 	}
 
+	// Encode() RFCと互換性の高いエンコード
 	r, err := http.Get("http://localhost:8888/" + "?" + values.Encode())
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
