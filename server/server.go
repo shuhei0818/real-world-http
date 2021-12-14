@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httputil"
+	"time"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -14,7 +15,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(string(dump))
 
-	fmt.Fprintf(w, "Hello World\n")
+	fmt.Fprintf(w, "Defalut\n")
 }
 
 func handlerCookie(w http.ResponseWriter, r *http.Request) {
@@ -26,11 +27,17 @@ func handlerCookie(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(string(dump))
 
 	w.Header().Add("Set-Cookie", "Visit=True")
-	fmt.Fprintf(w, "Hello World\n")
+	fmt.Fprintf(w, "Cookie\n")
+}
+
+func handlerSlow(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(3 * time.Second)
+	fmt.Fprintf(w, "Slow\n")
 }
 
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/cookie", handlerCookie)
+	http.HandleFunc("/slow", handlerSlow)
 	http.ListenAndServe(":8888", nil)
 }
