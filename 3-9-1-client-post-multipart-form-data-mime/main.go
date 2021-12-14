@@ -26,7 +26,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	rf, err := os.Open("photo.jpg")
+	rf, err := os.Open("3-9-1-client-post-multipart-form-data-mime/photo.jpg")
 	if err != nil {
 		panic(err)
 	}
